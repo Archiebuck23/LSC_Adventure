@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fefefe;
+    padding: 20px;
+  }
+  
+  #story-image {
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+  }
+  
+  .arrow {
+    font-size: 1.5rem;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .arrow:hover {
+    background-color: #bbb;
+  }
+  

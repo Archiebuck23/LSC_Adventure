@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Own Lunch at LSC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Choose Your Own Lunch at LSC</h1>
+  <div id="story-container">
+    <img id="story-image" src="start.jpg" alt="Scene" />
+    <p id="story-text">You’re at the LSC. Food court or downstairs?</p>
+    <div>
+      <button class="arrow" id="left-button" onclick="goLeft()">Left</button>
+      <button class="arrow" id="right-button" onclick="goRight()">Right</button>
+    </div>
+  </div>
+  <script>
+    const scenes = {
+      start: {
+        image: 'start.jpg',
+        text: 'You’re at the LSC. Will you go to the Food Court or go downstairs?',
+        left: 'friendFoodCourt',
+        right: 'friendDownstairs',
+        choiceTextLeft: 'Go to Food Court',
+        choiceTextRight: 'Go Downstairs'
+      },
+
+      friendFoodCourt: {
+        image: 'friend.jpg',
+        text: 'Your friend wants to eat somewhere else. What do you do?',
+        left: 'A2',
+        right: 'A1',
+        choiceTextLeft: 'Stick with friend',
+        choiceTextRight: 'Go get your own food'
+      },
+
+      friendDownstairs: {
+        image: 'friend.jpg',
+        text: 'Your friend wants to eat somewhere else. What do you do?',
+        left: 'A4',
+        right: 'A3',
+        choiceTextLeft: 'Stick with friend',
+        choiceTextRight: 'Go get your own food'
+      },
+
+      A1: {
+        image: 'foodcourt-options.jpg',
+        text: 'Pick your favorite food spot upstairs:',
+        left: 'panda',
+        right: 'freddys',
+        choiceTextLeft: 'Panda Express',
+        choiceTextRight: 'Freddy’s'
+      },
+
+      panda: {
+        image: 'panda.jpg',
+        text: 'You wait a long time in line and get Panda. Where do you sit?',
+        left: 'sitChaos',
+        right: 'sitWindow',
+        choiceTextLeft: 'Sit in the chaos',
+        choiceTextRight: 'Sit near the window'
+      },
+
+      freddys: {
+        image: 'freddys.jpg',
+        text: 'You get Freddy’s. Where do you sit?',
+        left: 'sitChaos',
+        right: 'sitWindow',
+        choiceTextLeft: 'Sit in the chaos',
+        choiceTextRight: 'Sit near the window'
+      },
+
+      A2: {
+        image: 'panda.jpg',
+        text: 'You get Panda with your friend (even though you didn’t want it). Where do you sit?',
+        left: 'sitChaosA2',
+        right: 'sitWindowA2',
+        choiceTextLeft: 'Sit in the chaos',
+        choiceTextRight: 'Sit near the window'
+      },
+
+      A3: {
+        image: 'downstairs-options.jpg',
+        text: 'Pick your favorite food downstairs:',
+        left: 'wings',
+        right: 'tenders',
+        choiceTextLeft: 'Wings',
+        choiceTextRight: 'Tenders'
+      },
+
+      wings: {
+        image: 'wings.jpg',
+        text: 'You grab wings. Beer or no beer?',
+        left: 'beerChaos',
+        right: 'endPeaceful',
+        choiceTextLeft: 'Beer me!',
+        choiceTextRight: 'Just eat my food'
+      },
+
+      tenders: {
+        image: 'tenders.jpg',
+        text: 'You grab tenders. Beer or no beer?',
+        left: 'beerChaos',
+        right: 'endPeaceful',
+        choiceTextLeft: 'Beer me!',
+        choiceTextRight: 'Just eat my food'
+      },
+
+      A4: {
+        image: 'ramskellar.jpg',
+        text: 'You and your friend go to Ramskellar. Get a beer?',
+        left: 'badEnding',
+        right: 'endFriend',
+        choiceTextLeft: 'Yes',
+        choiceTextRight: 'No'
+      },
+
+      sitChaos: {
+        image: 'chaos.jpg',
+        text: 'It’s crowded. No seat. You eat outside on the grass. Super Good Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      sitWindow: {
+        image: 'window.jpg',
+        text: 'You eat near the window, relax, and head to class. Peaceful Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      sitChaosA2: {
+        image: 'chaos.jpg',
+        text: 'You eat with your friend in the chaos. Great convo. You walk to class together. Good Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      sitWindowA2: {
+        image: 'window.jpg',
+        text: 'You sit with your friend by the window. Great convo. Good Friend Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      beerChaos: {
+        image: 'beer.jpg',
+        text: 'You got a beer and missed class. Decent Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      badEnding: {
+        image: 'kickout.jpg',
+        text: 'You and your friend got too drunk and were kicked out. Missed class. Bad Ending!',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      endFriend: {
+        image: 'friend-lunch.jpg',
+        text: 'You skipped the beer and had a great convo. You both walk to class. Good Friend Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      endPeaceful: {
+        image: 'peaceful.jpg',
+        text: 'You enjoyed your food, skipped the beer, and made it to class. Peaceful Ending.',
+        left: 'restart',
+        right: 'restart',
+        choiceTextLeft: 'Restart',
+        choiceTextRight: 'Restart'
+      },
+
+      restart: {
+        image: 'start.jpg',
+        text: 'Back at the LSC. Ready to try again?',
+        left: 'friendFoodCourt',
+        right: 'friendDownstairs',
+        choiceTextLeft: 'Go to Food Court',
+        choiceTextRight: 'Go Downstairs'
+      }
+    };
+
+    let currentScene = 'start';
+
+    function updateScene() {
+      const scene = scenes[currentScene];
+      document.getElementById('story-image').src = scene.image;
+      document.getElementById('story-text').innerText = scene.text;
+      document.getElementById('left-button').innerText = scene.choiceTextLeft;
+      document.getElementById('right-button').innerText = scene.choiceTextRight;
+    }
+
+    function goLeft() {
+      currentScene = scenes[currentScene].left;
+      updateScene();
+    }
+
+    function goRight() {
+      currentScene = scenes[currentScene].right;
+      updateScene();
+    }
+
+    updateScene();
+  </script>
+</body>
+</html>
